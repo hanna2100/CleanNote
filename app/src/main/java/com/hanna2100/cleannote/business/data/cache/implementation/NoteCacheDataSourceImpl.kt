@@ -21,11 +21,11 @@ constructor(
             = noteDaoService.deleteNotes(notes)
 
     override suspend fun updateNote(
-            primary: String,
-            newTitle: String,
-            newBody: String
+        primaryKey: String,
+        newTitle: String,
+        newBody: String
     ): Int
-            = noteDaoService.updateNote(primary, newTitle, newBody)
+            = noteDaoService.updateNote(primaryKey, newTitle, newBody)
 
     override suspend fun searchNote(
             query: String,
