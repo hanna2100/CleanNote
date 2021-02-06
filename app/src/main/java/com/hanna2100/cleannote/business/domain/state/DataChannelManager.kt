@@ -1,5 +1,6 @@
 package com.hanna2100.cleannote.business.domain.state
 
+import com.hanna2100.cleannote.util.printLogD
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -80,7 +81,6 @@ abstract class DataChannelManager<ViewState> {
     private fun offerToDataChannel(dataState: DataState<ViewState>) {
         dataChannel.let {
             if (!it.isClosedForSend) {
-                //TODO LogUtil로 로그찍기
                 it.offer(dataState)
             }
         }
@@ -91,7 +91,7 @@ abstract class DataChannelManager<ViewState> {
         jobFunction: Flow<DataState<ViewState>?>
     ) {
         if(canExecuteNewStateEvent(stateEvent)) {
-            //TODO LogUtil로 로그찍기
+            printLogD(this.javaClass, "launching job: ${stateEvent.eventName()}")
             addStateEvent(stateEvent)
             jobFunction.onEach { dataState ->
                 dataState?.let { dState ->
@@ -132,7 +132,6 @@ abstract class DataChannelManager<ViewState> {
     }
 
     fun clearStateMessage(index: Int = 0) {
-        //TODO 클리어 메세지
         messageStack.removeAt(index)
     }
 
@@ -142,7 +141,7 @@ abstract class DataChannelManager<ViewState> {
 
     fun printStateMessages() {
         for(message in messageStack) {
-            //TODO 로그메세지 남기기
+            printLogD(this.javaClass, "${message.response.message}")
         }
     }
 

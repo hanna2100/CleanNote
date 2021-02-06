@@ -1,6 +1,7 @@
 package com.hanna2100.cleannote.business.domain.state
 
 import android.view.View
+import com.hanna2100.cleannote.util.TodoCallback
 
 data class StateMessage(val response: Response)
 
@@ -22,7 +23,7 @@ sealed class UIComponentType {
 
     class SnackBar(
         val undoCallback: SnackbarUndoCallback? = null,
-        val onDismissCallback: Object? = null //TODO TodoCallback 만들어야함
+        val onDismissCallback: TodoCallback? = null
     ): UIComponentType()
 
     class None: UIComponentType()

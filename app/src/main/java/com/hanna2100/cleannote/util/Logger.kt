@@ -6,10 +6,10 @@ import com.hanna2100.cleannote.util.Constants.TAG
 
 var isUnitTest = false
 
-fun printLogD(className: String?, message: String) {
+fun <T> printLogD(clazz: Class<T>?, message: String) {
     if(DEBUG && isUnitTest.not()) {
-        Log.d(TAG, "$className: $message")
+        Log.d(TAG, "${clazz?.simpleName}: $message")
     } else if (DEBUG && isUnitTest) {
-        println("$className: $message")
+        println("${clazz?.simpleName}: $message")
     }
 }
