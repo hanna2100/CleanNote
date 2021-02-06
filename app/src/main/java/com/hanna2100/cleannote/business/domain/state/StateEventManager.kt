@@ -31,8 +31,8 @@ class StateEventManager {
         _shouldDisplayProgressBar.value = shouldDisplayProgressBar
     }
 
-    fun addStateEvent(stateEvent: StateEvent?) {
-        activeStateEvents.remove(stateEvent?.eventName())
+    fun addStateEvent(stateEvent: StateEvent) {
+        activeStateEvents.put(stateEvent.eventName(), stateEvent)
         syncNumActiveStateEvents()
     }
 

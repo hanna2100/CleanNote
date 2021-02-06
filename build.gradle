@@ -10,7 +10,6 @@ buildscript {
     dependencies {
         classpath Build.build_tools
         classpath Build.kotlin_gradle_plugin
-
     }
 }
 
