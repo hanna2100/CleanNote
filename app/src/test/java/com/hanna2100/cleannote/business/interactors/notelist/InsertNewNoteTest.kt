@@ -43,6 +43,7 @@ import java.util.*
  5) 네트워크가 업데이트 안되었는 지 확인
  */
 
+@InternalCoroutinesApi
 class InsertNewNoteTest {
     // system in test
     private val insertNewNoteTest: InsertNewNote
@@ -65,7 +66,6 @@ class InsertNewNoteTest {
         )
     }
 
-    @InternalCoroutinesApi
     @Test
     fun insertNote_success_confirmNetworkAndCacheUpdated() = runBlocking {
         val newNote: Note = noteFactory.createSingleNote(
