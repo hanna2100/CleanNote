@@ -2,6 +2,7 @@ package com.hanna2100.cleannote.business.data.network.implementation
 
 import com.hanna2100.cleannote.business.data.network.abstraction.NoteNetworkDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
+import com.hanna2100.cleannote.framwork.datasource.network.abstraction.NoteFirestoreService
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -9,7 +10,7 @@ import javax.inject.Singleton
 class NoteNetworkDataSourceImpl
 @Inject
 constructor(
-        private val firestoreService: NoteFirestoreService //TODO 만들어야함
+        private val firestoreService: NoteFirestoreService
 ): NoteNetworkDataSource{
     override suspend fun insertOrUpdateNote(note: Note)
             = firestoreService.insertOrUpdateNote(note)
@@ -26,8 +27,8 @@ constructor(
     override suspend fun deleteDeletedNote(note: Note)
             = firestoreService.deleteDeletedNote(note)
 
-    override suspend fun getDeletedNote(): List<Note>
-            = firestoreService.getDeletedNote()
+    override suspend fun getDeletedNotes(): List<Note>
+            = firestoreService.getDeletedNotes()
 
     override suspend fun deleteAllNotes()
             = firestoreService.deleteAllNotes()

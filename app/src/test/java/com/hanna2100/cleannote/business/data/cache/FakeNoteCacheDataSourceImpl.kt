@@ -67,7 +67,7 @@ constructor(
         }?: -1 // 실패
     }
 
-    override suspend fun searchNote(query: String, filterAndOrder: String, page: Int): List<Note> {
+    override suspend fun searchNotes(query: String, filterAndOrder: String, page: Int): List<Note> {
         if(query.equals(FORCE_SEARCH_NOTES_EXCEPTION)){
             throw Exception("Something went searching the cache for notes.")
         }

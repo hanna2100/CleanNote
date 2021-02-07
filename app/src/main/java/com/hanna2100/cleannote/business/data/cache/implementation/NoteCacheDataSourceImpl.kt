@@ -2,13 +2,15 @@ package com.hanna2100.cleannote.business.data.cache.implementation
 
 import com.hanna2100.cleannote.business.data.cache.abstraction.NoteCacheDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
+import com.hanna2100.cleannote.framwork.datasource.cache.abstraction.NoteDaoService
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@SinceKotlin
+@Singleton
 class NoteCacheDataSourceImpl
 @Inject
 constructor(
-        private val noteDaoService: NoteDaoService //TODO 만들어야 함
+        private val noteDaoService: NoteDaoService
 ): NoteCacheDataSource {
 
     override suspend fun insertNote(note: Note): Long
@@ -27,12 +29,13 @@ constructor(
     ): Int
             = noteDaoService.updateNote(primaryKey, newTitle, newBody)
 
-    override suspend fun searchNote(
+    override suspend fun searchNotes(
             query: String,
             filterAndOrder: String
             , page: Int
-    ): List<Note>
-            = noteDaoService.searchNote(query, filterAndOrder, page)
+    ): List<Note> {
+        TODO("Check filterAndOrder and make query")
+    }
 
     override suspend fun searchNoteById(primaryKey: String): Note?
             = noteDaoService.searchNoteById(primaryKey)
