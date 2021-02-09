@@ -12,8 +12,8 @@ class NoteDataFactory(
     fun produceListOfNotes(): List<Note>{
         val typeObj: Type = object : TypeToken<List<Note>>() {}.type
         val notes: List<Note> = Gson().fromJson(
-                json = getNotesFromFile("note_list.json"),
-                Type = typeObj
+                getNotesFromFile("note_list.json"),
+                typeObj
             )
         return notes
     }
