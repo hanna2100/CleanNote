@@ -37,7 +37,7 @@ sealed class NoteListStateEvent: StateEvent {
 
     }
 
-    class DeleteNewNoteEvent(
+    class DeleteNoteEvent(
         val note: Note
     ): NoteListStateEvent() {
         override fun errorInfo(): String {
