@@ -35,7 +35,7 @@ class SearchNotes(
             response = cacheResult,
             stateEvent = stateEvent
         ) {
-            override fun handleSuccess(result: List<Note>): DataState<NoteListViewState> {
+            override fun handleSuccess(result: List<Note>): DataState<NoteListViewState>? {
                 var message: String? = SEARCH_NOTES_SUCCESS
                 var uiComponentType: UIComponentType = UIComponentType.None()
                 if (result.isEmpty()) {

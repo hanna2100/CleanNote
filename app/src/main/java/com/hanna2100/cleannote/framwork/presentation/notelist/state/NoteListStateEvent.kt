@@ -53,7 +53,7 @@ sealed class NoteListStateEvent: StateEvent {
     }
 
     class DeleteMultipleNotesEvent(
-        val numNotes: Int
+        val notes: ArrayList<Note>
     ): NoteListStateEvent() {
         override fun errorInfo(): String {
             return "여러개의 노트 삭제 실패."

@@ -33,7 +33,7 @@ class DeleteNote<ViewState>(
             response = cacheResult,
             stateEvent = stateEvent
         ) {
-            override fun handleSuccess(result: Int): DataState<ViewState> {
+            override fun handleSuccess(result: Int): DataState<ViewState>? {
                 return if(result > 0) {
                     DataState.data(
                         response = Response(

@@ -52,6 +52,7 @@ android {
     sourceSets {
         test.resources.srcDirs += 'src/test/res'
     }
+
 }
 
 dependencies {
