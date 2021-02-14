@@ -17,7 +17,7 @@ class RestoreDeletedNote(
     private val noteNetworkDataSource: NoteNetworkDataSource
 ) {
     companion object {
-        val RESTORE_NOTE_SUCCES = "성공적으로 삭제된 노트를 복구함."
+        val RESTORE_NOTE_SUCCESS = "성공적으로 삭제된 노트를 복구함."
         val RESTORE_NOTE_FAILED = "삭제된 노트 복구에 실패함."
     }
 
@@ -43,7 +43,7 @@ class RestoreDeletedNote(
                     )
                     DataState.data(
                         response = Response(
-                            message = RESTORE_NOTE_SUCCES,
+                            message = RESTORE_NOTE_SUCCESS,
                             uiComponentType = UIComponentType.Toast(),
                             messageType = MessageType.Success()
                         ),
@@ -69,7 +69,7 @@ class RestoreDeletedNote(
     }
 
     private suspend fun updateNetwork(response: String?, note:Note) {
-        if(response.equals(RESTORE_NOTE_SUCCES)) {
+        if(response.equals(RESTORE_NOTE_SUCCESS)) {
 
             safeApiCall(IO) {
                 noteNetworkDataSource.insertOrUpdateNote(note)

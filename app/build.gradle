@@ -15,8 +15,8 @@ plugins {
 }
 
 android {
-    compileSdkVersion Versions.compilesdk
-    buildToolsVersion Versions.build_tools_version
+    compileSdkVersion 30
+    buildToolsVersion '30.0.0'
 
     defaultConfig {
         applicationId Application.id
@@ -35,8 +35,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility Java.java_version
-        targetCompatibility Java.java_version
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 
     kotlinOptions {
@@ -52,6 +52,7 @@ android {
     sourceSets {
         test.resources.srcDirs += 'src/test/res'
     }
+    ndkVersion '21.3.6528147'
 
 }
 
