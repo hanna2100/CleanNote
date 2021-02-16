@@ -6,14 +6,14 @@ import com.hanna2100.cleannote.business.domain.state.*
 
 abstract class ApiResponseHandler<ViewState, Data>(
         private val response: ApiResult<Data?>,
-        private val stateEvent: StateEvent
+        private val stateEvent: StateEvent?
 ) {
     suspend fun getResult(): DataState<ViewState> {
         return when(response) {
             is ApiResult.GenericError -> {
                 DataState.error(
                     response = Response(
-                        message = "${stateEvent.errorInfo()}\n\n" +
+                        message = "${stateEvent?.errorInfo()}\n\n" +
                                 "Reason: ${response.errorMessage}",
                         uiComponentType = UIComponentType.Dialog(),
                         messageType = MessageType.Error()
@@ -24,7 +24,7 @@ abstract class ApiResponseHandler<ViewState, Data>(
             is ApiResult.NetworkError -> {
                 DataState.error(
                     response = Response(
-                        message = "${stateEvent.errorInfo()}\n\n" +
+                        message = "${stateEvent?.errorInfo()}\n\n" +
                                 "Reason: $NETWORK_ERROR",
                         uiComponentType = UIComponentType.Dialog(),
                         messageType = MessageType.Error()
@@ -36,7 +36,7 @@ abstract class ApiResponseHandler<ViewState, Data>(
                 if (response.value == null ) {
                     DataState.error(
                         response = Response(
-                            message = "${stateEvent.errorInfo()}\n\n" +
+                            message = "${stateEvent?.errorInfo()}\n\n" +
                                     "Reason: $NETWORK_DATA_NULL",
                             uiComponentType = UIComponentType.Dialog(),
                             messageType = MessageType.Error()

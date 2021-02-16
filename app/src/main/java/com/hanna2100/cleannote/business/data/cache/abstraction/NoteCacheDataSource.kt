@@ -12,6 +12,7 @@ interface NoteCacheDataSource {
             filterAndOrder: String,
             page: Int
     ): List<Note>
+    suspend fun getAllNotes(): List<Note>
     suspend fun searchNoteById(primaryKey: String): Note?
     suspend fun getNumNotes(): Int
     suspend fun insertNotes(notes: List<Note>): LongArray
