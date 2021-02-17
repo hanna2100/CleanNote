@@ -8,7 +8,7 @@ abstract class ApiResponseHandler<ViewState, Data>(
         private val response: ApiResult<Data?>,
         private val stateEvent: StateEvent?
 ) {
-    suspend fun getResult(): DataState<ViewState> {
+    suspend fun getResult(): DataState<ViewState>? {
         return when(response) {
             is ApiResult.GenericError -> {
                 DataState.error(
