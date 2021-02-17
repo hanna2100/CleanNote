@@ -71,7 +71,7 @@ class SyncNotes(
                 }
             }.getResult()
 
-            val noteList = response.data?: ArrayList()
+            val noteList = response?.data?: ArrayList()
 
             val job = launch {
                 for(note in noteList) {
