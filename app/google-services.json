@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "859916352973",
+    "project_id": "cleannote-dfd4d",
+    "storage_bucket": "cleannote-dfd4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859916352973:android:4c50086e9a6c1c2ddc9884",
+        "android_client_info": {
+          "package_name": "com.hanna2100.cleannote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859916352973-obre2qq7evker9vmpkhsg4anuie98ugt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABhqwocCGSmEaa9YxpCEnNF--QKEi8Ask"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859916352973-obre2qq7evker9vmpkhsg4anuie98ugt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
