@@ -18,7 +18,7 @@ constructor(
         return sd.substring(0, sd.indexOf(" "))
     }
 
-    fun convertFirebaseTimestampToStringDate(timestamp: Timestamp): String{
+    fun convertFirebaseTimestampToStringData(timestamp: Timestamp): String{
         return dateFormat.format(timestamp.toString())
     }
 
