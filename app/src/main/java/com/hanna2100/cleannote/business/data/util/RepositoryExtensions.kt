@@ -8,6 +8,7 @@ import com.hanna2100.cleannote.business.data.network.NetworkConstants.NETWORK_TI
 import com.hanna2100.cleannote.business.data.network.NetworkErrors.NETWORK_ERROR_TIMEOUT
 import com.hanna2100.cleannote.business.data.network.NetworkErrors.NETWORK_ERROR_UNKNOWN
 import com.hanna2100.cleannote.business.data.util.GenericError.ERROR_UNKNOWN
+import com.hanna2100.cleannote.util.cLog
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withContext
@@ -32,6 +33,7 @@ suspend fun <T> safeApiCall(
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
+            cLog(throwable.message)
             when (throwable) {
                 is TimeoutCancellationException -> {
                     val code = 408 // timeout 에러코드
@@ -71,6 +73,7 @@ suspend fun <T> safeCacheCall(
             }
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
+            cLog(throwable.message)
             when (throwable) {
                 is TimeoutCancellationException -> {
                     CacheResult.GenericError(CACHE_ERROR_TIMEOUT)
