@@ -14,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NoteFirebaseServiceImpl
+class NoteFirestoreServiceImpl
 @Inject
 constructor(
     private val firebaseAuth: FirebaseAuth,
