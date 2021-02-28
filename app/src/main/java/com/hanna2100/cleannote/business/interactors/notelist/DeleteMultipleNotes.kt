@@ -7,7 +7,7 @@ import com.hanna2100.cleannote.business.data.util.safeApiCall
 import com.hanna2100.cleannote.business.data.util.safeCacheCall
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.state.*
-import com.hanna2100.cleannote.framwork.presentation.notelist.state.NoteListViewState
+import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListViewState
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

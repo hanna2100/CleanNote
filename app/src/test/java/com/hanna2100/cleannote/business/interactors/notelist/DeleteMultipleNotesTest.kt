@@ -9,8 +9,8 @@ import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.state.DataState
 import com.hanna2100.cleannote.business.interactors.notelist.DeleteMultipleNotes.Companion.DELETE_NOTES_ERRORS
 import com.hanna2100.cleannote.business.interactors.notelist.DeleteMultipleNotes.Companion.DELETE_NOTES_SUCCESS
-import com.hanna2100.cleannote.framwork.presentation.notelist.state.NoteListStateEvent
-import com.hanna2100.cleannote.framwork.presentation.notelist.state.NoteListViewState
+import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListStateEvent
+import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListViewState
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.runBlocking

@@ -1,7 +1,7 @@
 package com.hanna2100.cleannote.business.interactors.notelist
 
 import com.hanna2100.cleannote.business.interactors.common.DeleteNote
-import com.hanna2100.cleannote.framwork.presentation.notelist.state.NoteListViewState
+import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListViewState
 
 class NoteListInteractors (
     val insertNewNote: InsertNewNote,

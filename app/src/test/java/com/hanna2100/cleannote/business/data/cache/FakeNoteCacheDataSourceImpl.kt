@@ -3,7 +3,7 @@ package com.hanna2100.cleannote.business.data.cache
 import com.hanna2100.cleannote.business.data.cache.abstraction.NoteCacheDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.util.DateUtil
-import com.hanna2100.cleannote.framwork.datasource.cache.database.NOTE_PAGINATION_PAGE_SIZE
+import com.hanna2100.cleannote.framework.datasource.cache.database.NOTE_PAGINATION_PAGE_SIZE
 
 const val FORCE_DELETE_NOTE_EXCEPTION = "FORCE_DELETE_NOTE_EXCEPTION"
 const val FORCE_DELETES_NOTE_EXCEPTION = "FORCE_DELETES_NOTE_EXCEPTION"

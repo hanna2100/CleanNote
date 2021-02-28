@@ -2,8 +2,8 @@ package com.hanna2100.cleannote.di
 
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
-import com.hanna2100.cleannote.framwork.datasource.cache.database.NoteDatabase
-import com.hanna2100.cleannote.framwork.presentation.BaseApplication
+import com.hanna2100.cleannote.framework.datasource.cache.database.NoteDatabase
+import com.hanna2100.cleannote.framework.presentation.BaseApplication
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.ExperimentalCoroutinesApi

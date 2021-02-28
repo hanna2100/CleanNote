@@ -2,7 +2,7 @@ package com.hanna2100.cleannote.business.data.network.implementation
 
 import com.hanna2100.cleannote.business.data.network.abstraction.NoteNetworkDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
-import com.hanna2100.cleannote.framwork.datasource.network.abstraction.NoteFirestoreService
+import com.hanna2100.cleannote.framework.datasource.network.abstraction.NoteFirestoreService
 import javax.inject.Inject
 import javax.inject.Singleton
 

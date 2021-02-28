@@ -1,7 +1,7 @@
 package com.hanna2100.cleannote.di
 
-import com.hanna2100.cleannote.framwork.presentation.BaseApplication
-import com.hanna2100.cleannote.framwork.presentation.MainActivity
+import com.hanna2100.cleannote.framework.presentation.BaseApplication
+import com.hanna2100.cleannote.framework.presentation.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.ExperimentalCoroutinesApi

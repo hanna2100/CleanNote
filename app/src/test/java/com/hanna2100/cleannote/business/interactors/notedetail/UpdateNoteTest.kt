@@ -10,8 +10,8 @@ import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.state.DataState
 import com.hanna2100.cleannote.business.interactors.notedetail.UpdateNote.Companion.UPDATE_NOTE_FAILURE
 import com.hanna2100.cleannote.business.interactors.notedetail.UpdateNote.Companion.UPDATE_NOTE_SUCCESS
-import com.hanna2100.cleannote.framwork.presentation.notedetail.state.NoteDetailStateEvent
-import com.hanna2100.cleannote.framwork.presentation.notedetail.state.NoteDetailViewState
+import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailStateEvent
+import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailViewState
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.runBlocking

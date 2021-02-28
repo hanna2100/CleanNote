@@ -2,7 +2,7 @@ package com.hanna2100.cleannote.business.data.cache.implementation
 
 import com.hanna2100.cleannote.business.data.cache.abstraction.NoteCacheDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
-import com.hanna2100.cleannote.framwork.datasource.cache.abstraction.NoteDaoService
+import com.hanna2100.cleannote.framework.datasource.cache.abstraction.NoteDaoService
 import javax.inject.Inject
 import javax.inject.Singleton
 
