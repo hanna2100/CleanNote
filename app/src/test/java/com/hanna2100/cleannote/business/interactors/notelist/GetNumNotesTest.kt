@@ -1,7 +1,6 @@
 package com.hanna2100.cleannote.business.interactors.notelist
 
 import com.hanna2100.cleannote.business.data.cache.abstraction.NoteCacheDataSource
-import com.hanna2100.cleannote.business.data.network.abstraction.NoteNetworkDataSource
 import com.hanna2100.cleannote.business.di.DependencyContainer
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.state.DataState

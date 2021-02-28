@@ -1,5 +1,6 @@
 package com.hanna2100.cleannote.di
 
+import com.hanna2100.cleannote.framwork.presentation.BaseApplication
 import com.hanna2100.cleannote.framwork.presentation.MainActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -12,7 +13,8 @@ import javax.inject.Singleton
 @ExperimentalCoroutinesApi
 @Component(
     modules = [
-
+        AppModule::class,
+        ProductionModule::class
     ]
 )
 interface AppComponent{

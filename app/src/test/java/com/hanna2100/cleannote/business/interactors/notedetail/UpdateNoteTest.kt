@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.util.*
-import java.util.stream.Collector
 
 /*
 테스트 케이스

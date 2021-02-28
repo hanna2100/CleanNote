@@ -10,6 +10,7 @@ import com.hanna2100.cleannote.business.data.network.implementation.NoteNetworkD
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.util.DateUtil
 import com.hanna2100.cleannote.business.interactors.common.DeleteNote
+import com.hanna2100.cleannote.business.interactors.notedetail.NoteDetailInteractors
 import com.hanna2100.cleannote.business.interactors.notedetail.UpdateNote
 import com.hanna2100.cleannote.business.interactors.notelist.*
 import com.hanna2100.cleannote.business.interactors.splash.SyncDeletedNotes
@@ -177,7 +178,7 @@ object AppModule  {
     fun provideNoteDetailInteractors(
             noteCacheDataSource: NoteCacheDataSource,
             noteNetworkDataSource: NoteNetworkDataSource
-    ): NoteDetailInteractors{
+    ): NoteDetailInteractors {
         return NoteDetailInteractors(
                 DeleteNote(noteCacheDataSource, noteNetworkDataSource),
                 UpdateNote(noteCacheDataSource, noteNetworkDataSource)

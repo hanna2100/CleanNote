@@ -4,7 +4,6 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hanna2100.cleannote.business.domain.model.Note
-import com.hanna2100.cleannote.framwork.datasource.cache.model.NoteEntity
 import com.hanna2100.cleannote.framwork.datasource.network.abstraction.NoteFirestoreService
 import com.hanna2100.cleannote.framwork.datasource.network.mappers.NetworkMapper
 import com.hanna2100.cleannote.framwork.datasource.network.model.NoteNetworkEntity
