@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.di.TestAppComponent
+import com.hanna2100.cleannote.framework.BaseTest
 import com.hanna2100.cleannote.framework.datasource.network.abstraction.NoteFirestoreService
 import com.hanna2100.cleannote.framework.datasource.network.implementation.NoteFirestoreServiceImpl
 import com.hanna2100.cleannote.framework.datasource.network.mappers.NetworkMapper
@@ -25,7 +26,7 @@ import javax.inject.Inject
 @ExperimentalCoroutinesApi
 @FlowPreview
 @RunWith(AndroidJUnit4ClassRunner::class)
-class NoteFirestoreServiceTests {
+class NoteFirestoreServiceTests: BaseTest() {
 
     companion object {
         const val EMAIL = "hanna0497test@naver.com"
@@ -34,7 +35,6 @@ class NoteFirestoreServiceTests {
 
     private lateinit var noteFirestoreService: NoteFirestoreService
 
-    val application: TestBaseApplication = ApplicationProvider.getApplicationContext<Context>() as TestBaseApplication
 
     @Inject
     lateinit var firestore: FirebaseFirestore
@@ -82,6 +82,10 @@ class NoteFirestoreServiceTests {
             EMAIL,
             PASSWORD
         ).await()
+    }
+
+    override fun injectTest() {
+        (application as TestAppComponent).inject(this)
     }
 
 }
