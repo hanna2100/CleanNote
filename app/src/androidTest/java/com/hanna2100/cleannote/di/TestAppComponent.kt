@@ -1,6 +1,7 @@
 package com.hanna2100.cleannote.di
 
 import com.hanna2100.cleannote.business.TempTest
+import com.hanna2100.cleannote.framework.datasource.network.NoteFirestoreServiceTests
 import com.hanna2100.cleannote.framework.presentation.TestBaseApplication
 import dagger.BindsInstance
 import dagger.Component
@@ -21,4 +22,5 @@ interface TestAppComponent : AppComponent {
     }
 
     fun inject(tempTest: TempTest)
+    fun inject(noteFirestoreServiceTests: NoteFirestoreServiceTests)
 }

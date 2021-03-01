@@ -2,6 +2,7 @@ package com.hanna2100.cleannote.di
 
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.hanna2100.cleannote.framework.datasource.cache.database.NoteDatabase
 import com.hanna2100.cleannote.framework.presentation.TestBaseApplication
 import dagger.Module
@@ -28,7 +29,20 @@ object TestModule {
     @JvmStatic
     @Singleton
     @Provides
-    fun provideFirebaseFirestore(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
+    fun provideFirestoreSettings(): FirebaseFirestoreSettings {
+        return FirebaseFirestoreSettings.Builder()
+            .setHost("10.0.2.2:8080")
+            .setSslEnabled(false)
+            .setPersistenceEnabled(false)
+            .build()
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideFirebaseFirestore(settings: FirebaseFirestoreSettings): FirebaseFirestore {
+        val firestore = FirebaseFirestore.getInstance()
+        firestore.firestoreSettings = settings
+        return firestore
     }
 }

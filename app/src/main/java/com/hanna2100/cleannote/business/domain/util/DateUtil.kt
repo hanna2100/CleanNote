@@ -19,7 +19,7 @@ constructor(
     }
 
     fun convertFirebaseTimestampToStringData(timestamp: Timestamp): String{
-        return dateFormat.format(timestamp.toString())
+        return dateFormat.format(timestamp.toDate())
     }
 
     fun convertStringDateToFirebaseTimestamp(date: String): Timestamp {
