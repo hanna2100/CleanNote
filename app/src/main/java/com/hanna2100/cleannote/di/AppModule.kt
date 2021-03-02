@@ -40,7 +40,7 @@ object AppModule  {
     @Singleton
     @Provides
     fun provideDateFormat(): SimpleDateFormat {
-        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.KOREA)
+        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.ENGLISH)
         sdf.timeZone = TimeZone.getTimeZone("Asia/Seoul")
         return sdf
     }

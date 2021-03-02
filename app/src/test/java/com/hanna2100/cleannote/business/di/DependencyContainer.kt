@@ -14,7 +14,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class DependencyContainer {
-    private val dataFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.KOREA)
+    private val dataFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss a", Locale.ENGLISH)
     val dateUtil = DateUtil(dataFormat)
     lateinit var noteNetworkDataSource: NoteNetworkDataSource
     lateinit var noteCacheDataSource: NoteCacheDataSource

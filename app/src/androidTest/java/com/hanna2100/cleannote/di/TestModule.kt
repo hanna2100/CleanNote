@@ -3,7 +3,9 @@ package com.hanna2100.cleannote.di
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.framework.datasource.cache.database.NoteDatabase
+import com.hanna2100.cleannote.framework.datasource.data.NoteDataFactory
 import com.hanna2100.cleannote.framework.presentation.TestBaseApplication
 import dagger.Module
 import dagger.Provides
@@ -45,4 +47,15 @@ object TestModule {
         firestore.firestoreSettings = settings
         return firestore
     }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideNoteDataFactory(
+        application: TestBaseApplication,
+        noteFactory: NoteFactory
+    ): NoteDataFactory {
+        return NoteDataFactory(application, noteFactory)
+    }
+
 }
