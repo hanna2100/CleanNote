@@ -76,7 +76,6 @@ constructor(
 
     override suspend fun insertDeletedNote(note: Note) {
         val entity = networkMapper.mapToEntity(note)
-        entity.updated_at = Timestamp.now()
         firestore.collection(DELETES_COLLECTION)
             .document(USER_ID)
             .collection(NOTES_COLLECTION)
@@ -98,10 +97,8 @@ constructor(
 
         firestore.runBatch { batch ->
             for (note in notes) {
-                val entity = networkMapper.mapToEntity(note)
-                entity.updated_at = Timestamp.now()
-                val documentRef = collectionRef.document(entity.id)
-                batch.set(documentRef, entity)
+                val documentRef = collectionRef.document(note.id)
+                batch.set(documentRef, networkMapper.mapToEntity(note))
             }
         }.addOnFailureListener {
             cLog(it.message)
