@@ -5,9 +5,10 @@ import com.hanna2100.cleannote.business.data.network.abstraction.NoteNetworkData
 import com.hanna2100.cleannote.business.di.DependencyContainer
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
+import com.hanna2100.cleannote.business.domain.util.DateUtil
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,6 +40,7 @@ class SyncNotesTest {
     private val noteCacheDataSource: NoteCacheDataSource
     private val noteNetworkDataSource: NoteNetworkDataSource
     private val noteFactory: NoteFactory
+    private val dateUtil: DateUtil
 
     init {
         dependencyContainer = DependencyContainer()
@@ -46,10 +48,65 @@ class SyncNotesTest {
         noteCacheDataSource = dependencyContainer.noteCacheDataSource
         noteNetworkDataSource = dependencyContainer.noteNetworkDataSource
         noteFactory = dependencyContainer.noteFactory
+        dateUtil = dependencyContainer.dateUtil
         syncNotesTest = SyncNotes(
             noteCacheDataSource = noteCacheDataSource,
             noteNetworkDataSource = noteNetworkDataSource
         )
+    }
+
+    @Test
+    fun doSuccessiveUpdatesOccur() = runBlocking {
+        val newTimestamp = dateUtil.getCurrentTimestamp()
+        val updatedNote = Note(
+                id = noteNetworkDataSource.getAllNotes().first().id,
+                title = noteNetworkDataSource.getAllNotes().first().title,
+                body = noteNetworkDataSource.getAllNotes().first().body,
+                created_at = noteNetworkDataSource.getAllNotes().first().created_at,
+                updated_at = newTimestamp
+        )
+        noteNetworkDataSource.insertOrUpdateNote(updatedNote)
+        // 여기까지가 1번 디바이스에서 발생한 이벤트
+        // 아래서부터 2번 디바이스에서 실행함
+        syncNotesTest.syncNotes()
+        delay(1001)
+
+        // 앱이 재실행되었다고 가정
+        syncNotesTest.syncNotes()
+
+        // 날짜가 업데이트 되지 않았음을 확인
+        val notes = noteNetworkDataSource.getAllNotes()
+        for(note in notes) {
+            if(note.id.equals(updatedNote.id)) {
+                assertTrue { note.updated_at.equals(newTimestamp) }
+            }
+        }
+    }
+
+    @Test
+    fun checkUpdatedAtDates() = runBlocking {
+        val newTimestamp = dateUtil.getCurrentTimestamp()
+        val updatedNote = Note(
+            id = noteNetworkDataSource.getAllNotes().first().id,
+            title = noteNetworkDataSource.getAllNotes().first().title,
+            body = noteNetworkDataSource.getAllNotes().first().body,
+            created_at = noteNetworkDataSource.getAllNotes().first().created_at,
+            updated_at = newTimestamp
+        )
+        noteNetworkDataSource.insertOrUpdateNote(updatedNote)
+
+        syncNotesTest.syncNotes()
+
+        val notes = noteNetworkDataSource.getAllNotes()
+        for(note in notes) {
+            noteCacheDataSource.searchNoteById(note.id)?.let { cacheNote ->
+                if(cacheNote.id.equals(updatedNote.id)) {
+                    assertTrue { cacheNote.updated_at.equals(newTimestamp) }
+                } else {
+                    assertFalse { cacheNote.updated_at.equals(newTimestamp) }
+                }
+            }
+        }
     }
 
     @Test

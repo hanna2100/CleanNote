@@ -2,14 +2,23 @@ package com.hanna2100.cleannote.business.data.network
 
 import com.hanna2100.cleannote.business.data.network.abstraction.NoteNetworkDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
+import com.hanna2100.cleannote.business.domain.util.DateUtil
 
 class FakeNoteNetworkDataSourceImpl
 constructor(
     private val notesData: HashMap<String, Note>,
-    private val deletedNotesData: HashMap<String, Note>
+    private val deletedNotesData: HashMap<String, Note>,
+    private val dateUtil: DateUtil
 ): NoteNetworkDataSource {
     override suspend fun insertOrUpdateNote(note: Note) {
-        notesData.put(note.id, note)
+        val n = Note(
+                id = note.id,
+                title = note.title,
+                body = note.body,
+                created_at = note.created_at,
+                updated_at = dateUtil.getCurrentTimestamp()
+        )
+        notesData.put(note.id, n)
     }
 
     override suspend fun deleteNote(primaryKey: String) {
