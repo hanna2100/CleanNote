@@ -3,6 +3,7 @@ package com.hanna2100.cleannote.business.data.cache.implementation
 import com.hanna2100.cleannote.business.data.cache.abstraction.NoteCacheDataSource
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.framework.datasource.cache.abstraction.NoteDaoService
+import java.sql.Timestamp
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,9 +26,10 @@ constructor(
     override suspend fun updateNote(
         primaryKey: String,
         newTitle: String,
-        newBody: String
+        newBody: String,
+        timestamp: String?
     ): Int
-            = noteDaoService.updateNote(primaryKey, newTitle, newBody)
+            = noteDaoService.updateNote(primaryKey, newTitle, newBody, timestamp)
 
     override suspend fun searchNotes(
             query: String,

@@ -2,6 +2,7 @@ package com.hanna2100.cleannote.framework.datasource.cache.abstraction
 
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.framework.datasource.cache.database.NOTE_PAGINATION_PAGE_SIZE
+import java.sql.Timestamp
 
 interface NoteDaoService {
 
@@ -12,9 +13,10 @@ interface NoteDaoService {
     suspend fun searchNoteById(id: String): Note?
 
     suspend fun updateNote(
-            primaryKey: String,
-            title: String,
-            body: String?
+        primaryKey: String,
+        title: String,
+        body: String?,
+        timestamp: String?
     ): Int
 
     suspend fun deleteNote(primaryKey: String): Int

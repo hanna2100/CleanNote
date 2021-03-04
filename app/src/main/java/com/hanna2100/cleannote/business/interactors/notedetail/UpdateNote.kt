@@ -30,7 +30,8 @@ class UpdateNote(
             noteCacheDataSource.updateNote(
                 primaryKey = note.id,
                 newTitle = note.title,
-                newBody = note.body
+                newBody = note.body,
+                timestamp = null
             )
         }
 
