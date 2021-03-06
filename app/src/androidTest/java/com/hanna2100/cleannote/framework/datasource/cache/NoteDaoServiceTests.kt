@@ -10,6 +10,7 @@ import com.hanna2100.cleannote.framework.datasource.cache.database.NoteDao
 import com.hanna2100.cleannote.framework.datasource.cache.implementation.NoteDaoServiceImpl
 import com.hanna2100.cleannote.framework.datasource.cache.util.CacheMapper
 import com.hanna2100.cleannote.framework.datasource.data.NoteDataFactory
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -180,6 +181,8 @@ class NoteDaoServiceTests : BaseTest() {
         )
         noteDaoService.insertNote(newNote)
 
+        delay(2000)
+
         val newTitle = UUID.randomUUID().toString()
         val newBody = UUID.randomUUID().toString()
         noteDaoService.updateNote(
@@ -188,7 +191,6 @@ class NoteDaoServiceTests : BaseTest() {
             body = newBody,
             timestamp = null
         )
-
         val notes = noteDaoService.searchNotes()
 
         var foundNote = false
@@ -208,10 +210,90 @@ class NoteDaoServiceTests : BaseTest() {
         }
         assertTrue { foundNote }
     }
-    //9. 노트 검색, 날짜별 정렬(ASC), 정렬 확인
-    //10. 노트 검색, 날짜별 정렬(DESC), 정렬 확인
-    //11. 노트 검색, 제목별 정렬(ASC), 정렬 확인
-    //12. 노트 검색, 제목별 정렬(DESC), 정렬 확인
+    //9. 날짜별 정렬(ASC) 노트 검색, 정렬 확인
+    @Test
+    fun searchNotes_orderByDateASC_confirmOrder() = runBlocking {
+        val noteList = noteDaoService.searchNotesOrderByDateASC(
+            query = "",
+            page = 1,
+            pageSize = 100
+        )
+
+        var previousNoteDate = noteList.get(0).updated_at
+        for(index in 1 until noteList.size) {
+            val currentNoteDate = noteList.get(index).updated_at
+            assertTrue {
+                currentNoteDate >= previousNoteDate
+            }
+            previousNoteDate = currentNoteDate
+        }
+    }
+    //10. 날짜별 정렬(DESC) 노트 검색, 정렬 확인
+    @Test
+    fun searchNotes_orderByDateDESC_confirmOrder() = runBlocking {
+        val noteList = noteDaoService.searchNotesOrderByDateDESC(
+                query = "",
+                page = 1,
+                pageSize = 100
+        )
+
+        // check that the date gets larger (newer) as iterate down the list
+        var previous = noteList.get(0).updated_at
+        for(index in 1..noteList.size - 1){
+            val current = noteList.get(index).updated_at
+            assertTrue { current <= previous }
+            previous = current
+        }
+    }
+
+    //11. 제목별 정렬(ASC) 노트 검색, 정렬 확인
+    @Test
+    fun searchNotes_orderByTitleASC_confirmOrder() = runBlocking {
+        val noteList = noteDaoService.searchNotesOrderByTitleASC(
+                query = "",
+                page = 1,
+                pageSize = 100
+        )
+
+        // check that the date gets larger (newer) as iterate down the list
+        var previous = noteList.get(0).title
+        for(index in 1..noteList.size - 1){
+            val current = noteList.get(index).title
+
+            assertTrue {
+                listOf(previous, current)
+                        .asSequence()
+                        .zipWithNext { a, b ->
+                            a <= b
+                        }.all { it }
+            }
+            previous = current
+        }
+    }
+    //12. 제목별 정렬(DESC) 노트 검색, 정렬 확인
+    @Test
+    fun searchNotes_orderByTitleDESC_confirmOrder() = runBlocking {
+        val noteList = noteDaoService.searchNotesOrderByTitleDESC(
+                query = "",
+                page = 1,
+                pageSize = 100
+        )
+
+        // check that the date gets larger (newer) as iterate down the list
+        var previous = noteList.get(0).title
+        for(index in 1..noteList.size - 1){
+            val current = noteList.get(index).title
+
+            assertTrue {
+                listOf(previous, current)
+                        .asSequence()
+                        .zipWithNext { a, b ->
+                            a >= b
+                        }.all { it }
+            }
+            previous = current
+        }
+    }
 
     override fun injectTest() {
         (application.appComponent as TestAppComponent).inject(this)
