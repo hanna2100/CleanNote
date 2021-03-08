@@ -47,6 +47,10 @@ abstract class DataChannelManager<ViewState> {
             .launchIn(getChannelScope())
     }
 
+    private fun handleNewStateMessage(stateMessage: StateMessage) {
+        messageStack.add(stateMessage)
+    }
+
     private fun getChannelScope(): CoroutineScope {
         return channelScope?: setUpNewChannelScope(CoroutineScope(IO))
     }
@@ -56,15 +60,13 @@ abstract class DataChannelManager<ViewState> {
         return channelScope as CoroutineScope
     }
 
-    abstract fun handleNewStateMessage(stateMessage: StateMessage)
-
     abstract fun handleNewData(data: ViewState)
 
     fun removeStateEvent(stateEvent: StateEvent?) {
         stateEventManager.removeStateEvent(stateEvent)
     }
 
-    private fun cancelJobs() {
+    fun cancelJobs() {
         if (channelScope != null) {
             if (channelScope?.isActive == true) {
                channelScope?.cancel()
@@ -74,7 +76,7 @@ abstract class DataChannelManager<ViewState> {
         clearActiveStateEventCounter()
     }
 
-    private fun clearActiveStateEventCounter() {
+    fun clearActiveStateEventCounter() {
         stateEventManager.clearActiveStateEventCounter()
     }
 
