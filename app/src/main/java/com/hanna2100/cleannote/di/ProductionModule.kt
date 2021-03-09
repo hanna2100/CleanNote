@@ -1,8 +1,11 @@
 package com.hanna2100.cleannote.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.google.firebase.firestore.FirebaseFirestore
 import com.hanna2100.cleannote.framework.datasource.cache.database.NoteDatabase
+import com.hanna2100.cleannote.framework.datasource.preferences.PreferenceKeys
 import com.hanna2100.cleannote.framework.presentation.BaseApplication
 import dagger.Module
 import dagger.Provides
@@ -31,4 +34,17 @@ object ProductionModule  {
     fun provideFirebaseFirestore(): FirebaseFirestore {
         return FirebaseFirestore.getInstance()
     }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(
+        application: BaseApplication
+    ): SharedPreferences {
+        return application.getSharedPreferences(
+            PreferenceKeys.NOTE_PREFERENCES,
+            Context.MODE_PRIVATE
+        )
+    }
+
 }

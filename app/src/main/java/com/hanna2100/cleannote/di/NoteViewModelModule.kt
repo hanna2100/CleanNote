@@ -6,9 +6,15 @@ import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.interactors.notedetail.NoteDetailInteractors
 import com.hanna2100.cleannote.business.interactors.notelist.NoteListInteractors
 import com.hanna2100.cleannote.framework.presentation.common.NoteViewModelFactory
+import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Singleton
 
+@ExperimentalCoroutinesApi
+@FlowPreview
+@Module
 object NoteViewModelModule {
 
     @Singleton
