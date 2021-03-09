@@ -1,4 +1,4 @@
-package com.hanna2100.cleannote.framework.presentation.notedetail
+package com.hanna2100.cleannote.framework.presentation.splash
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -9,12 +9,12 @@ import kotlinx.coroutines.FlowPreview
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class NoteDetailFragment
+class SplashFragment
 constructor(
     private val factory: ViewModelProvider.Factory
-): BaseNoteFragment(R.layout.fragment_note_detail) {
+) : BaseNoteFragment(R.layout.fragment_splash){
 
-    val viewModel: NoteDetailViewModel by viewModels {
+    val viewModel: SplashViewModel by viewModels{
         factory
     }
 
