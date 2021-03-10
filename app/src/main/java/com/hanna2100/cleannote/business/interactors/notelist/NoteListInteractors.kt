@@ -9,7 +9,7 @@ class NoteListInteractors (
     val searchNotes: SearchNotes,
     val getNumNotes: GetNumNotes,
     val restoreDeletedNote: RestoreDeletedNote,
-    val deleteNoteMultipleNotes: DeleteMultipleNotes
+    val deleteMultipleNotes: DeleteMultipleNotes
 ) {
 
 }

@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.flow
 abstract class BaseViewModel<ViewState> : ViewModel() {
     private val _viewState: MutableLiveData<ViewState> = MutableLiveData()
 
+    // Intent 에 의한 View 를 각 화면별 ViewModel 의 handleNewData 로 구현하게함.
     val dataChannelManager: DataChannelManager<ViewState> = object : DataChannelManager<ViewState>() {
         override fun handleNewData(data: ViewState) {
             this@BaseViewModel.handleNewData(data)

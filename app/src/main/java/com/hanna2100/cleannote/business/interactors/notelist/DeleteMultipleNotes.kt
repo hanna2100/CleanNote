@@ -25,7 +25,7 @@ class DeleteMultipleNotes(
         val DELETE_NOTES_ARE_YOU_SURE = "정말로 노트들을 삭제하겠습니까?"
     }
 
-    fun deleteNote(
+    fun deleteNotes(
         notes: List<Note>,
         stateEvent: StateEvent
     ): Flow<DataState<NoteListViewState>?> = flow {

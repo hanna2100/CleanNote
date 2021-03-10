@@ -86,7 +86,7 @@ class DeleteMultipleNotesTest {
             }
         }
 
-        deleteMultipleNotesTest?.deleteNote(
+        deleteMultipleNotesTest?.deleteNotes(
             notes = randomNotes,
             stateEvent = NoteListStateEvent.DeleteMultipleNotesEvent(randomNotes)
         )?.collect(object : FlowCollector<DataState<NoteListViewState>?> {
@@ -137,7 +137,7 @@ class DeleteMultipleNotesTest {
 
         val notesToDelete = ArrayList(validNotes + invalidNotes)
 
-        deleteMultipleNotesTest?.deleteNote(
+        deleteMultipleNotesTest?.deleteNotes(
             notes = notesToDelete,
             stateEvent = NoteListStateEvent.DeleteMultipleNotesEvent(notesToDelete)
         )?.collect(object : FlowCollector<DataState<NoteListViewState>?> {
@@ -189,7 +189,7 @@ class DeleteMultipleNotesTest {
 
         val notesToDelete = ArrayList(validNotes + invalidNotes)
 
-        deleteMultipleNotesTest?.deleteNote(
+        deleteMultipleNotesTest?.deleteNotes(
             notes = notesToDelete,
             stateEvent = NoteListStateEvent.DeleteMultipleNotesEvent(notesToDelete)
         )?.collect(object : FlowCollector<DataState<NoteListViewState>?> {

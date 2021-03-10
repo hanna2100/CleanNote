@@ -90,8 +90,9 @@ abstract class DataChannelManager<ViewState> {
 
     fun launchJob(
         stateEvent: StateEvent,
-        jobFunction: Flow<DataState<ViewState>?>
+        jobFunction: Flow<DataState<ViewState>?> // 각 화면별 ViewModel 에서 정의한 ViewState 별
     ) {
+        // 이벤트를 실행할 수 있는 상태인지 체크(이미 진행중/후인 이벤트일 수 있음)
         if(canExecuteNewStateEvent(stateEvent)) {
             printLogD(this.javaClass, "launching job: ${stateEvent.eventName()}")
             addStateEvent(stateEvent)
@@ -129,7 +130,7 @@ abstract class DataChannelManager<ViewState> {
     }
 
     // 디버깅용
-    private fun getActiveJobs() {
+    fun getActiveJobs() {
         stateEventManager.getActiveJobNames()
     }
 
@@ -147,4 +148,5 @@ abstract class DataChannelManager<ViewState> {
         }
     }
 
+    
 }
