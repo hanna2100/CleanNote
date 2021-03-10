@@ -1,6 +1,8 @@
 package com.hanna2100.cleannote.framework.presentation.notedetail.state
 
+import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.state.StateEvent
+import com.hanna2100.cleannote.business.domain.state.StateMessage
 
 sealed class NoteDetailStateEvent : StateEvent {
 
@@ -16,7 +18,9 @@ sealed class NoteDetailStateEvent : StateEvent {
         override fun shouldDisplayProgressBar(): Boolean = true
     }
 
-    class DeleteNoteEvent: NoteDetailStateEvent() {
+    class DeleteNoteEvent(
+        val note: Note
+    ): NoteDetailStateEvent() {
         override fun errorInfo(): String {
             return "Error deleting note"
         }
@@ -28,7 +32,9 @@ sealed class NoteDetailStateEvent : StateEvent {
         override fun shouldDisplayProgressBar(): Boolean = true
     }
 
-    class CreateStateMessageEvent: NoteDetailStateEvent() {
+    class CreateStateMessageEvent(
+        val stateMessageEvent: StateMessage
+    ): NoteDetailStateEvent() {
         override fun errorInfo(): String {
             return "Error creating a new state message."
         }
