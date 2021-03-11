@@ -2,6 +2,7 @@ package com.hanna2100.cleannote.framework.presentation.notelist
 
 import android.content.SharedPreferences
 import android.os.Parcelable
+import androidx.lifecycle.LiveData
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.state.*
@@ -12,8 +13,10 @@ import com.hanna2100.cleannote.framework.datasource.preferences.PreferenceKeys.C
 import com.hanna2100.cleannote.framework.datasource.preferences.PreferenceKeys.Companion.NOTE_ORDER
 import com.hanna2100.cleannote.framework.presentation.common.BaseViewModel
 import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailStateEvent
+import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListInteractionManager
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListStateEvent
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListStateEvent.*
+import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListToolbarState
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListViewState
 import com.hanna2100.cleannote.util.printLogD
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,6 +34,11 @@ constructor(
     private val editor: SharedPreferences.Editor,
     private val sharedPreferences: SharedPreferences
 ): BaseViewModel<NoteListViewState>() {
+
+    val noteListInteractionManager = NoteListInteractionManager()
+
+    val toolbarState: LiveData<NoteListToolbarState>
+        get() = noteListInteractionManager.toolbarState
 
     init {
         setNoteFilter(
@@ -138,6 +146,23 @@ constructor(
     override fun initNewViewState(): NoteListViewState {
         return NoteListViewState()
     }
+
+    // State
+    fun getSelectedNotes() = noteListInteractionManager.getSelectedNotes()
+
+    fun setToolbarState(state: NoteListToolbarState)
+            = noteListInteractionManager.setToolbarState(state)
+
+    fun isMultiSelectionStateActive()
+            = noteListInteractionManager.isMultiSelectionStateActive()
+
+    fun addOrRemoveNoteFromSelectedList(note: Note)
+            = noteListInteractionManager.addOrRemoveNoteFromSelectedList(note)
+
+    fun isNoteSelected(note: Note): Boolean
+            = noteListInteractionManager.isNoteSelected(note)
+
+    fun clearSelectedNotes() = noteListInteractionManager.clearSelectedNotes()
 
     fun getFilter(): String {
         return getCurrentViewStateOrNew().filter
