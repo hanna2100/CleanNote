@@ -2,6 +2,8 @@ package com.hanna2100.cleannote.di
 
 import com.hanna2100.cleannote.framework.presentation.BaseApplication
 import com.hanna2100.cleannote.framework.presentation.MainActivity
+import com.hanna2100.cleannote.framework.presentation.notedetail.NoteDetailFragment
+import com.hanna2100.cleannote.framework.presentation.notelist.NoteListFragment
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,4 +30,6 @@ interface AppComponent{
     }
 
     fun inject(mainActivity: MainActivity)
+    fun inject(noteListFragment: NoteListFragment)
+    fun inject(noteDetailFragment: NoteDetailFragment)
 }
