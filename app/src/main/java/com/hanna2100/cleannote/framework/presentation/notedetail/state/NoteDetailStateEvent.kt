@@ -33,7 +33,7 @@ sealed class NoteDetailStateEvent : StateEvent {
     }
 
     class CreateStateMessageEvent(
-        val stateMessageEvent: StateMessage
+        val stateMessage: StateMessage
     ): NoteDetailStateEvent() {
         override fun errorInfo(): String {
             return "Error creating a new state message."
