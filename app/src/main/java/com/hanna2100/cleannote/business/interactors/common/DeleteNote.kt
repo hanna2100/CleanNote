@@ -18,7 +18,9 @@ class DeleteNote<ViewState>(
 
     companion object {
         const val DELETE_NOTE_SUCCESS = "성공적으로 노트를 삭제함."
-        const val DELETE_NOTE_FAILURE = "노트를 삭제를 실패함."
+        const val DELETE_NOTE_FAILED = "노트를 삭제를 실패함."
+        const val DELETE_NOTE_PENDING = "휴지통에 보관중..."
+        const val DELETE_ARE_YOU_SURE = "노트를 삭제하시겠습니까?"
     }
 
     fun deleteNote(
@@ -47,7 +49,7 @@ class DeleteNote<ViewState>(
                 } else {
                     DataState.data(
                         response = Response(
-                            message = DELETE_NOTE_FAILURE,
+                            message = DELETE_NOTE_FAILED,
                             uiComponentType = UIComponentType.Toast(),
                             messageType = MessageType.Error()
                         ),

@@ -90,6 +90,10 @@ dependencies {
     implementation SupportDependencies.material_design
     implementation SupportDependencies.swipe_refresh_layout
 
+    // Material
+    implementation Dependencies.material_dialogs
+    implementation Dependencies.material_dialogs_input
+
     // Unit tests
     testImplementation TestDependencies.mockk
     testImplementation TestDependencies.jupiter_api

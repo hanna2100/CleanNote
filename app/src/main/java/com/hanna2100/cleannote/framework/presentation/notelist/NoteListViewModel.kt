@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.state.*
+import com.hanna2100.cleannote.business.interactors.notelist.DeleteMultipleNotes.Companion.DELETE_NOTES_YOU_MUST_SELECT
 import com.hanna2100.cleannote.business.interactors.notelist.NoteListInteractors
 import com.hanna2100.cleannote.framework.datasource.cache.database.NOTE_FILTER_DATE_CREATED
 import com.hanna2100.cleannote.framework.datasource.cache.database.NOTE_ORDER_DESC
@@ -358,7 +359,7 @@ constructor(
         if (pendingNote != null) {
             setStateEvent(
                 NoteDetailStateEvent.CreateStateMessageEvent(
-                    stateMessageEvent = StateMessage(
+                    stateMessage = StateMessage(
                         response = Response(
                             message = DELETE_PENDING_ERROR,
                             uiComponentType = UIComponentType.Toast(),
@@ -422,6 +423,33 @@ constructor(
     fun refreshSearchQuery() {
         setQueryExhausted(false)
         setStateEvent(SearchNotesEvent(false))
+    }
+
+    fun deleteNotes(){
+        if(getSelectedNotes().size > 0){
+            setStateEvent(DeleteMultipleNotesEvent(getSelectedNotes()))
+            removeSelectedNotesFromList()
+        }
+        else{
+            setStateEvent(
+                CreateStateMessageEvent(
+                    stateMessage = StateMessage(
+                        response = Response(
+                            message = DELETE_NOTES_YOU_MUST_SELECT,
+                            uiComponentType = UIComponentType.Toast(),
+                            messageType = MessageType.Info()
+                        )
+                    )
+                )
+            )
+        }
+    }
+
+    private fun removeSelectedNotesFromList(){
+        val update = getCurrentViewStateOrNew()
+        update.noteList?.removeAll(getSelectedNotes())
+        setViewState(update)
+        clearSelectedNotes()
     }
 
 }

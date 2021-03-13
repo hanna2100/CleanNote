@@ -4,7 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.RadioGroup
+import android.widget.TextView
+import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -12,10 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.hanna2100.cleannote.R
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.state.*
 import com.hanna2100.cleannote.business.domain.util.DateUtil
+import com.hanna2100.cleannote.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_PENDING
 import com.hanna2100.cleannote.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_SUCCESS
 import com.hanna2100.cleannote.business.interactors.notelist.DeleteMultipleNotes.Companion.DELETE_NOTES_ARE_YOU_SURE
 import com.hanna2100.cleannote.framework.datasource.cache.database.NOTE_FILTER_DATE_CREATED
@@ -26,10 +35,8 @@ import com.hanna2100.cleannote.framework.presentation.BaseApplication
 import com.hanna2100.cleannote.framework.presentation.UIController
 import com.hanna2100.cleannote.framework.presentation.common.BaseNoteFragment
 import com.hanna2100.cleannote.framework.presentation.common.hideKeyboard
-import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailStateEvent
 import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailStateEvent.*
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListStateEvent
-import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListToolbarState
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListToolbarState.*
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListViewState
 import com.hanna2100.cleannote.util.TodoCallback
@@ -38,13 +45,24 @@ import kotlinx.android.synthetic.main.fragment_note_list.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
+const val NOTE_LIST_STATE_BUNDLE_KEY = "com.hanna2100.cleannote.framework.presentation.notelist.NoteListFragment"
 @FlowPreview
 @ExperimentalCoroutinesApi
 class NoteListFragment
 constructor(
         private val factory: ViewModelProvider.Factory,
         private val dateUtil: DateUtil
-): BaseNoteFragment(R.layout.fragment_note_list){
+): BaseNoteFragment(R.layout.fragment_note_list),
+        NoteListAdapter.Interaction,
+        ItemTouchHelperAdapter
+{
+    // Do extensions
+    // 1. NoteListAdapter.Interaction
+    // 2. ItemTouchHelperAdapter
+
+    lateinit var uiController: UIController
+    private var listAdapter: NoteListAdapter? = null
+    private var itemTouchHelper: ItemTouchHelper? = null
 
     val viewModel: NoteListViewModel by viewModels {
         factory
@@ -84,13 +102,6 @@ constructor(
                 viewModel.setViewState(viewState)
             }
         }
-    }
-
-    override fun inject() {
-        activity?.run {
-            (application as BaseApplication).appComponent
-                    .inject(this@NoteListFragment)
-        }?: throw Exception("AppComponent is null.")
     }
 
     override fun onResume() {
@@ -163,6 +174,13 @@ constructor(
         }
     }
 
+    override fun inject() {
+        activity?.run {
+            (application as BaseApplication).appComponent
+                    .inject(this@NoteListFragment)
+        }?: throw Exception("AppComponent is null.")
+    }
+
     override fun onAttach(context: Context) {
         try{
             uiController = context as UIController
@@ -172,14 +190,6 @@ constructor(
         super.onAttach(context)
 
     }
-
-    // Do extensions
-    // 1. NoteListAdapter.Interaction
-    // 2. ItemTouchHelperAdapter
-
-    lateinit var uiController: UIController
-    private var listAdapter: NoteListAdapter? = null
-    private var itemTouchHelper: ItemTouchHelper? = null
 
     private fun setupRecyclerView(){
         recycler_view.apply {
@@ -219,40 +229,19 @@ constructor(
                 .findViewById<Toolbar>(R.id.searchview_toolbar)
 
         searchViewToolbar?.let { toolbar ->
-
             val searchView = toolbar.findViewById<SearchView>(R.id.search_view)
 
             val searchPlate: SearchView.SearchAutoComplete?
                     = searchView.findViewById(androidx.appcompat.R.id.search_src_text)
 
-            // can't use QueryTextListener in production b/c can't submit an empty string
-            when{
-                androidTestUtils.isTest() -> {
-                    searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-                        override fun onQueryTextSubmit(query: String?): Boolean {
-                            viewModel.setQuery(query)
-                            startNewSearch()
-                            return true
-                        }
-
-                        override fun onQueryTextChange(newText: String?): Boolean {
-                            return true
-                        }
-
-                    })
+            searchPlate?.setOnEditorActionListener { v, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
+                        || actionId == EditorInfo.IME_ACTION_SEARCH ) {
+                    val searchQuery = v.text.toString()
+                    viewModel.setQuery(searchQuery)
+                    startNewSearch()
                 }
-
-                else ->{
-                    searchPlate?.setOnEditorActionListener { v, actionId, _ ->
-                        if (actionId == EditorInfo.IME_ACTION_UNSPECIFIED
-                                || actionId == EditorInfo.IME_ACTION_SEARCH ) {
-                            val searchQuery = v.text.toString()
-                            viewModel.setQuery(searchQuery)
-                            startNewSearch()
-                        }
-                        true
-                    }
-                }
+                true
             }
         }
     }

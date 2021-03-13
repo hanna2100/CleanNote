@@ -130,9 +130,7 @@ abstract class DataChannelManager<ViewState> {
     }
 
     // 디버깅용
-    fun getActiveJobs() {
-        stateEventManager.getActiveJobNames()
-    }
+    fun getActiveJobs() = stateEventManager.getActiveJobNames()
 
     fun clearStateMessage(index: Int = 0) {
         messageStack.removeAt(index)

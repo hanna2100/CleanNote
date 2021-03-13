@@ -7,7 +7,7 @@ import com.hanna2100.cleannote.business.data.network.abstraction.NoteNetworkData
 import com.hanna2100.cleannote.business.di.DependencyContainer
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.state.DataState
-import com.hanna2100.cleannote.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_FAILURE
+import com.hanna2100.cleannote.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_FAILED
 import com.hanna2100.cleannote.business.interactors.common.DeleteNote.Companion.DELETE_NOTE_SUCCESS
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListStateEvent
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListViewState
@@ -101,7 +101,7 @@ class DeleteNoteTest {
             override suspend fun emit(value: DataState<NoteListViewState>?) {
                 assertEquals(
                     value?.stateMessage?.response?.message,
-                    DELETE_NOTE_FAILURE
+                    DELETE_NOTE_FAILED
                 )
             }
         })
