@@ -35,6 +35,7 @@ import com.hanna2100.cleannote.framework.presentation.BaseApplication
 import com.hanna2100.cleannote.framework.presentation.UIController
 import com.hanna2100.cleannote.framework.presentation.common.BaseNoteFragment
 import com.hanna2100.cleannote.framework.presentation.common.hideKeyboard
+import com.hanna2100.cleannote.framework.presentation.notedetail.NOTE_DETAIL_SELECTED_NOTE_BUNDLE_KEY
 import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailStateEvent.*
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListStateEvent
 import com.hanna2100.cleannote.framework.presentation.notelist.state.NoteListToolbarState.*

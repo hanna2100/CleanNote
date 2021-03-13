@@ -6,6 +6,10 @@ import com.hanna2100.cleannote.framework.presentation.common.BaseViewModel
 import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailViewState
 import javax.inject.Inject
 
+const val NOTE_DETAIL_ERROR_RETRIEVEING_SELECTED_NOTE = "Error retrieving selected note from bundle."
+const val NOTE_DETAIL_SELECTED_NOTE_BUNDLE_KEY = "selectedNote"
+const val NOTE_TITLE_CANNOT_BE_EMPTY = "Note title can not be empty."
+
 class NoteDetailViewModel
 @Inject
 constructor(
