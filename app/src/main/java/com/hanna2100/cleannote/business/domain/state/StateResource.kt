@@ -58,11 +58,11 @@ interface SnackbarUndoCallback {
 
 class SnackbarUndoListener
 constructor(
-    private val snackbarUndoCallback: SnackbarUndoCallback
+    private val snackbarUndoCallback: SnackbarUndoCallback?
 ): View.OnClickListener {
 
     override fun onClick(p0: View?) {
-        snackbarUndoCallback.undo()
+        snackbarUndoCallback?.undo()
     }
 }
 
