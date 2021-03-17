@@ -8,7 +8,7 @@ import com.hanna2100.cleannote.business.di.DependencyContainer
 import com.hanna2100.cleannote.business.domain.model.Note
 import com.hanna2100.cleannote.business.domain.model.NoteFactory
 import com.hanna2100.cleannote.business.domain.state.DataState
-import com.hanna2100.cleannote.business.interactors.notedetail.UpdateNote.Companion.UPDATE_NOTE_FAILURE
+import com.hanna2100.cleannote.business.interactors.notedetail.UpdateNote.Companion.UPDATE_NOTE_FAILED
 import com.hanna2100.cleannote.business.interactors.notedetail.UpdateNote.Companion.UPDATE_NOTE_SUCCESS
 import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailStateEvent
 import com.hanna2100.cleannote.framework.presentation.notedetail.state.NoteDetailViewState
@@ -109,7 +109,7 @@ class UpdateNoteTest {
             override suspend fun emit(value: DataState<NoteDetailViewState>?) {
                 assertEquals (
                         value?.stateMessage?.response?.message,
-                        UPDATE_NOTE_FAILURE
+                        UPDATE_NOTE_FAILED
                 )
             }
         })

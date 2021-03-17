@@ -19,7 +19,7 @@ class UpdateNote(
 
     companion object {
         val UPDATE_NOTE_SUCCESS = "노트 업데이트 성공함."
-        val UPDATE_NOTE_FAILURE = "노트 업데이트 실패함."
+        val UPDATE_NOTE_FAILED = "노트 업데이트 실패함."
     }
 
     fun updateNote(
@@ -53,7 +53,7 @@ class UpdateNote(
                 } else {
                     return DataState.data(
                         response = Response(
-                            message = UPDATE_NOTE_FAILURE,
+                            message = UPDATE_NOTE_FAILED,
                             uiComponentType = UIComponentType.Toast(),
                             messageType = MessageType.Error()
                         ),

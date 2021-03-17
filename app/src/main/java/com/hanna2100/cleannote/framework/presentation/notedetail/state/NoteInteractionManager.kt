@@ -63,6 +63,6 @@ class NoteInteractionManager {
     // return true if either title or body are in EditState
     fun checkEditState() = noteTitleState.value.toString().equals(EditState().toString())
             || noteBodyState.value.toString().equals(EditState().toString())
-    
+
 
 }
