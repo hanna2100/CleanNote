@@ -72,18 +72,13 @@ constructor(
         setUIController(null)
     }
 
-    fun setUIController(mockController: UIController?) {
-        // Test 용
-        if(mockController != null) {
-            this.uiController = mockController
-        } else { // 서비스용
-            activity?.let {
-                if(it is MainActivity) {
-                    try {
-                        uiController = context as UIController
-                    }catch (e: ClassCastException) {
-                        e.printStackTrace()
-                    }
+    fun setUIController(mockController: UIController?) { // 서비스용
+        activity?.let {
+            if(it is MainActivity) {
+                try {
+                    uiController = context as UIController
+                }catch (e: ClassCastException) {
+                    e.printStackTrace()
                 }
             }
         }

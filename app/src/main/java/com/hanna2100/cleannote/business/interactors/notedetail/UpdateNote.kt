@@ -20,6 +20,7 @@ class UpdateNote(
     companion object {
         val UPDATE_NOTE_SUCCESS = "노트 업데이트 성공함."
         val UPDATE_NOTE_FAILED = "노트 업데이트 실패함."
+        val UPDATE_NOTE_FAILED_PK = "업데이트 실패. 유효하지 않은 노트입니다."
     }
 
     fun updateNote(
