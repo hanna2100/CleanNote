@@ -8,6 +8,7 @@ import com.hanna2100.cleannote.business.interactors.notedetail.NoteDetailInterac
 import com.hanna2100.cleannote.business.interactors.notelist.NoteListInteractors
 import com.hanna2100.cleannote.framework.presentation.notedetail.NoteDetailViewModel
 import com.hanna2100.cleannote.framework.presentation.notelist.NoteListViewModel
+import com.hanna2100.cleannote.framework.presentation.splash.NoteNetworkSyncManager
 import com.hanna2100.cleannote.framework.presentation.splash.SplashViewModel
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class NoteViewModelFactory
 constructor(
     private val noteListInteractors: NoteListInteractors,
     private val noteDetailInteractors: NoteDetailInteractors,
+    private val noteNetworkSyncManager: NoteNetworkSyncManager,
     private val noteFactory: NoteFactory,
     private val editor: SharedPreferences.Editor,
     private val sharedPreferences: SharedPreferences
@@ -39,7 +41,7 @@ constructor(
             }
 
             SplashViewModel::class.java -> {
-                SplashViewModel() as T
+                SplashViewModel(noteNetworkSyncManager) as T
             }
 
             else -> {

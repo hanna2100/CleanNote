@@ -112,8 +112,8 @@ class MainActivity: AppCompatActivity(),
             is UIComponentType.Toast -> {
                 response.message?.let {
                     displayToast(
-                            message = it,
-                            stateMessageCallback = stateMessageCallback
+                        message = it,
+                        stateMessageCallback = stateMessageCallback
                     )
                 }
             }

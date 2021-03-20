@@ -23,6 +23,7 @@ import com.hanna2100.cleannote.framework.datasource.cache.util.CacheMapper
 import com.hanna2100.cleannote.framework.datasource.network.abstraction.NoteFirestoreService
 import com.hanna2100.cleannote.framework.datasource.network.implementation.NoteFirestoreServiceImpl
 import com.hanna2100.cleannote.framework.datasource.network.mappers.NetworkMapper
+import com.hanna2100.cleannote.framework.presentation.splash.NoteNetworkSyncManager
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -201,6 +202,16 @@ object AppModule  {
                 RestoreDeletedNote(noteCacheDataSource, noteNetworkDataSource),
                 DeleteMultipleNotes(noteCacheDataSource, noteNetworkDataSource)
         )
+    }
+
+    @JvmStatic
+    @Singleton
+    @Provides
+    fun provideNoteNetworkSyncManager(
+            syncNotes: SyncNotes,
+            syncDeletedNotes: SyncDeletedNotes
+    ): NoteNetworkSyncManager {
+        return NoteNetworkSyncManager(syncNotes, syncDeletedNotes)
     }
 
 }

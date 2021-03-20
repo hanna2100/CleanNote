@@ -530,15 +530,14 @@ constructor(
             stateMessage?.let { message ->
                 if(message.response.message?.equals(DELETE_NOTE_SUCCESS) == true){
                     showUndoSnackbar_deleteNote()
-                }
-                else{
+                } else{
                     uiController.onResponseReceived(
-                            response = message.response,
-                            stateMessageCallback = object: StateMessageCallback {
-                                override fun removeMessageFromStack() {
-                                    viewModel.clearStateMessage()
-                                }
+                        response = message.response,
+                        stateMessageCallback = object: StateMessageCallback {
+                            override fun removeMessageFromStack() {
+                                viewModel.clearStateMessage()
                             }
+                        }
                     )
                 }
             }

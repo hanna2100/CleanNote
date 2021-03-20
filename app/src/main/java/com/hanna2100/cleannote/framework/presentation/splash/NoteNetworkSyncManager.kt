@@ -39,6 +39,7 @@ constructor(
                 syncNotes.syncNotes()
             }
         }
+
         syncJob.invokeOnCompletion {
             CoroutineScope(Main).launch {
                 _hasSyncBeenExecuted.value = true
