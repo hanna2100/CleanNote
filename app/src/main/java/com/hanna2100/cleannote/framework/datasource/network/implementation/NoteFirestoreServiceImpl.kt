@@ -26,7 +26,7 @@ constructor(
         const val USERS_COLLECTION = "users"
         const val DELETES_COLLECTION = "deletes"
         const val USER_ID = "lPVqRtcrM2XQHl7u3JVD9PynAGl1"
-        const val EMAIL = "mitch@tabian.ca"
+        const val EMAIL = "hanna0497@naver.com"
     }
     override suspend fun insertOrUpdateNote(note: Note) {
         val entity = networkMapper.mapToEntity(note)

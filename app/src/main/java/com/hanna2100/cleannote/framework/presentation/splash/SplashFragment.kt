@@ -57,6 +57,8 @@ constructor(
                             if(it.isSuccessful) {
                                 printLogD(this.javaClass, "Signing in to Firebase: ${it.result}")
                                 subscribeObservers()
+                            } else {
+                                printLogD(this.javaClass, "Failed signing in to Firebase")
                             }
                         }
                 }

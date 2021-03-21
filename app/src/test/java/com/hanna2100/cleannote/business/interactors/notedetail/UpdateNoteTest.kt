@@ -67,10 +67,12 @@ class UpdateNoteTest {
             page = 1
         ).first()
 
-        val updatedNote = noteFactory.createSingleNote(
+        val updatedNote = Note(
             id = randomNote.id,
             title = UUID.randomUUID().toString(),
-            body = UUID.randomUUID().toString()
+            body = UUID.randomUUID().toString(),
+            updated_at = dependencyContainer.dateUtil.getCurrentTimestamp(),
+            created_at = randomNote.created_at
         )
 
         updateNoteTest.updateNote(
